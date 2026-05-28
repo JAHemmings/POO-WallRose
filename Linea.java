@@ -1,16 +1,25 @@
-package POO_Tienda;
+package logica;
 
 public class Linea {
-    private double cantidad;
-    private Producto producto;
 
-    public Linea(double cantidad, Producto producto) {
-        this.cantidad = cantidad;
+    private int numero;
+    private Producto producto;
+    private double cantidad;
+    private double precioUnitario;
+
+    public Linea(int numero, Producto producto, double cantidad) {
+        this.numero = numero;
         this.producto = producto;
+        this.cantidad = cantidad;
+        this.precioUnitario = producto.getPrecio();
     }
 
-    public double calcularSubtotal() {
-        return cantidad * producto.getPrecio();
+    public double calcularCosto() {
+        return cantidad * precioUnitario;
+    }
+
+    public int getNumero() {
+        return numero;
     }
 
     public Producto getProducto() {
@@ -21,12 +30,7 @@ public class Linea {
         return cantidad;
     }
 
-    @Override
-    public String toString() {
-        return "Linea{" +
-                "cantidad=" + cantidad +
-                ", producto=" + producto.getNombre() +
-                ", subtotal=" + calcularSubtotal() +
-                '}';
+    public double getPrecioUnitario() {
+        return precioUnitario;
     }
 }

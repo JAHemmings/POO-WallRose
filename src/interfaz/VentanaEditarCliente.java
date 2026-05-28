@@ -98,8 +98,7 @@ public class VentanaEditarCliente extends JFrame {
             return;
         }
 
-        JOptionPane.showMessageDialog(this,
-                "Cliente guardado correctamente");
+        JOptionPane.showMessageDialog(this, "Cliente guardado correctamente");
     }
 
     public void limpiarCampos() {
@@ -109,9 +108,6 @@ public class VentanaEditarCliente extends JFrame {
     }
 
     public void mostrarError(String msj) {
-        JOptionPane.showMessageDialog(this,
-                msj,
-                "Error",
-                JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, msj, "Error", JOptionPane.ERROR_MESSAGE);
     }
 }

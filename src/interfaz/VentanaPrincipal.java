@@ -42,47 +42,35 @@ public class VentanaPrincipal extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JLabel lblTitulo =
-                new JLabel("Sistema de Gestión");
+        JLabel lblTitulo = new JLabel("Sistema de Gestión");
 
-        lblTitulo.setFont(
-                new Font("Tahoma", Font.BOLD, 24)
-        );
+        lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 24));
 
         lblTitulo.setBounds(150, 40, 320, 40);
         contentPane.add(lblTitulo);
 
-        JButton btnClientes =
-                new JButton("Clientes");
+        JButton btnClientes = new JButton("Clientes");
         btnClientes.setBounds(200, 120, 180, 45);
         contentPane.add(btnClientes);
 
-        JButton btnProductos =
-                new JButton("Productos");
+        JButton btnProductos = new JButton("Productos");
         btnProductos.setBounds(200, 190, 180, 45);
         contentPane.add(btnProductos);
 
-        JButton btnOrdenes =
-                new JButton("Órdenes");
+        JButton btnOrdenes = new JButton("Órdenes");
         btnOrdenes.setBounds(200, 260, 180, 45);
         contentPane.add(btnOrdenes);
 
         btnClientes.addActionListener(e -> {
-            VentanaClientes ventana =
-                    new VentanaClientes();
-            ventana.setVisible(true);
-        });
+            VentanaClientes ventana = new VentanaClientes();
+            ventana.setVisible(true);});
 
         btnProductos.addActionListener(e -> {
-            VentanaProductos ventana =
-                    new VentanaProductos();
-            ventana.setVisible(true);
-        });
+            VentanaProductos ventana = new VentanaProductos();
+            ventana.setVisible(true);});
 
         btnOrdenes.addActionListener(e -> {
-            VentanaOrdenes ventana =
-                    new VentanaOrdenes();
-            ventana.setVisible(true);
-        });
+            VentanaOrdenes ventana = new VentanaOrdenes();
+            ventana.setVisible(true);});
     }
 }

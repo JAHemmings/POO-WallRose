@@ -1,72 +1,72 @@
-package POO_Tienda;
+package logica;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Orden {
-    private static int consecutivoGlobal = 1;
 
-    private int consecutivo;
-    private String estado;
+    private int numero;
     private LocalDateTime fecha;
-    private ArrayList<Linea> lineas;
+    private EstadoOrden estado;
+    private Cliente cliente;
+    private List<Linea> lineas;
 
-    public Orden(String estado) {
-        this.consecutivo = consecutivoGlobal++;
-        this.estado = estado;
+    public Orden(int numero, Cliente cliente) {
+        this.numero = numero;
+        this.cliente = cliente;
         this.fecha = LocalDateTime.now();
+        this.estado = EstadoOrden.PENDIENTE;
         this.lineas = new ArrayList<>();
     }
 
     public void agregarLinea(Linea linea) {
         lineas.add(linea);
     }
-
-    public void borrarLinea(int indice) {
-        if (indice >= 0 && indice < lineas.size()) {
-            lineas.remove(indice);
-        }
-    }
-
-    public double calcularCosto() {
+    public double calcularSubTotal() {
         double total = 0;
-        for (Linea linea : lineas) {
-            total += linea.calcularSubtotal();
+
+        for (Linea l : lineas) {
+            total += l.calcularCosto();
         }
 
         return total;
     }
 
     public double calcularImpuesto() {
-        return calcularCosto() * 0.13;
+        return calcularSubTotal() * 0.13;
     }
 
     public double calcularTotal() {
-        return calcularCosto() + calcularImpuesto();
+        return calcularSubTotal() + calcularImpuesto();
     }
 
-    public void detalle() {
-        System.out.println(this);
-        for (Linea linea : lineas) {
-            System.out.println(linea);
-        }
+    public void terminarOrden() {
+        estado = EstadoOrden.TERMINADA;
     }
 
-    public String getEstado() {
+    public int getNumero() {
+        return numero;
+    }
+
+    public LocalDateTime getFecha() {
+        return fecha;
+    }
+
+    public EstadoOrden getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public List<Linea> getLineas() {
+        return lineas;
     }
 
     @Override
     public String toString() {
-        return "Orden{" +
-                "consecutivo=" + consecutivo +
-                ", estado='" + estado + '\'' +
-                ", fecha=" + fecha +
-                ", total=" + calcularTotal() +
-                '}';
+        return "Orden #" + numero + " - " + estado;
     }
 }

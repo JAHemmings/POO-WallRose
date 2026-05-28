@@ -1,37 +1,79 @@
-package POO_Tienda;
+package control;
 
-public class Main {
-    public static void main(String[] args) {
-        Control control = new Control();
-        Producto p1 = new Producto("Laptop", 10, "Unidad", 450000);
-        Producto p2 = new Producto("Mouse", 30, "Unidad", 15000);
-        Producto p3 = new Producto("Teclado", 20, "Unidad", 25000);
-        control.agregarProducto(p1);
-        control.agregarProducto(p2);
-        control.agregarProducto(p3);
-        Cliente cliente1 = new Cliente(
-                "00",
-                "Rei Ayanami",
-                "rei@gmail.com"
-        );
+import java.util.ArrayList;
+import java.util.List;
 
-        control.agregarCliente(cliente1);
-        Orden orden1 = new Orden("Pendiente");
-        Linea l1 = new Linea(1, p1);
-        Linea l2 = new Linea(2, p2);
-        orden1.agregarLinea(l1);
-        orden1.agregarLinea(l2);
-        cliente1.agregarOrden(orden1);
-        control.agregarOrden(orden1);
-        control.llamarClientes();
-        System.out.println();
-        control.llamarProducto();
-        System.out.println();
-        control.llamarOrden();
-        System.out.println();
-        System.out.println("===== DETALLE ORDEN =====");
-        orden1.detalle();
-        System.out.println();
-        System.out.println("Total Orden: " + orden1.calcularTotal());
+import logica.Cliente;
+import logica.Linea;
+import logica.Orden;
+import logica.Producto;
+
+public class Control {
+
+    private static Control instancia;
+    private List<Cliente> clientes;
+    private List<Producto> productos;
+    private List<Orden> ordenes;
+    private int consecutivoProducto;
+    private int consecutivoOrden;
+
+    private Control() {
+        clientes = new ArrayList<>();
+        productos = new ArrayList<>();
+        ordenes = new ArrayList<>();
+        consecutivoProducto = 1;
+        consecutivoOrden = 1;
+    }
+
+    public static Control getInstancia() {
+        if (instancia == null) {
+            instancia = new Control();
+        }
+        return instancia;
+    }
+
+    public void agregarCliente(String id, String nombre, String email) {
+        Cliente c = new Cliente(id, nombre, email);
+        clientes.add(c);
+    }
+
+    public List<Cliente> obtenerClientes() {
+        return clientes;
+    }
+
+    public void agregarProducto(String nombre, int existencias, double unidad, double precio, int codigo) {
+        Producto p = new Producto(consecutivoProducto, nombre, existencias, unidad, precio, codigo);
+        productos.add(p);
+        consecutivoProducto++;
+    }
+
+    public List<Producto> obtenerProductos() {
+        return productos;
+    }
+
+    public Producto buscarProducto(int codigo) {
+        for (Producto p : productos) {
+            if (p.getCodigo() == codigo) {
+                return p;
+            }
+        }
+        return null;
+    }
+    
+    public Orden crearOrden(Cliente cliente) {
+        Orden orden = new Orden(consecutivoOrden, cliente);
+        cliente.agregarOrden(orden);
+        ordenes.add(orden);
+        consecutivoOrden++;
+        return orden;
+    }
+
+    public void agregarLinea(Orden orden, Producto producto, double cantidad) {
+        Linea linea = new Linea(orden.getLineas().size() + 1, producto, cantidad);
+        orden.agregarLinea(linea);
+    }
+
+    public List<Orden> obtenerOrdenes() {
+        return ordenes;
     }
 }

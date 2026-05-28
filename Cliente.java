@@ -1,62 +1,34 @@
-package POO_Tienda;
+package logica;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Cliente {
-	private String id;
+
+    private String id;
     private String nombre;
     private String email;
-    private LinkedList<Orden> ordenes;
-
-	public Cliente(String id, String nombre, String email) {
+    private List<Orden> ordenes;
+    public Cliente(String id, String nombre, String email) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
-        this.ordenes = new LinkedList<>();
+        this.ordenes = new ArrayList<>();
     }
 
     public void agregarOrden(Orden orden) {
         ordenes.add(orden);
     }
 
-    public void mostrarListaOrdenes() {
-        for (Orden orden : ordenes) {
-            System.out.println(orden);
+    public double calcularTotal() {
+        double total = 0;
+        for (Orden o : ordenes) {
+            total += o.calcularTotal();
         }
-    }
 
-    public void mostrarListaOrdenesIniciadas() {
-        for (Orden orden : ordenes) {
-            if (orden.getEstado().equalsIgnoreCase("Iniciada")) {
-                System.out.println(orden);
-            }
-        }
+        return total;
     }
-
-    public void mostrarListaOrdenesPendientes() {
-        for (Orden orden : ordenes) {
-            if (orden.getEstado().equalsIgnoreCase("Pendiente")) {
-                System.out.println(orden);
-            }
-        }
-    }
-
-    public void mostrarListaOrdenesTerminadas() {
-        for (Orden orden : ordenes) {
-            if (orden.getEstado().equalsIgnoreCase("Terminada")) {
-                System.out.println(orden);
-            }
-        }
-    }
-
-    public int calcularTotal() {
-        int suma = 0;
-        for (Orden orden : ordenes) {
-            suma += orden.calcularTotal();
-        }
-        return suma;
-    }
-
+    
     public String getId() {
         return id;
     }
@@ -69,16 +41,12 @@ public class Cliente {
         return email;
     }
 
-    public LinkedList<Orden> getOrdenes() {
+    public List<Orden> getOrdenes() {
         return ordenes;
     }
 
     @Override
     public String toString() {
-        return "Cliente{" +
-                "id='" + id + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+        return nombre;
     }
 }

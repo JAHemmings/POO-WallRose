@@ -1,60 +1,66 @@
-package POO_Tienda;
+package logica;
 
 public class Producto {
-    private static int consecutivoGlobal = 1;
 
     private int consecutivo;
     private String nombre;
-    private double existencias;
-    private String unidad;
+    private int existencias;
+    private double unidad;
     private double precio;
     private int codigo;
 
-    public Producto(String nombre, double existencias, String unidad, double precio) {
-        this.consecutivo = consecutivoGlobal++;
+    public Producto(int consecutivo, String nombre, int existencias, double unidad,  double precio, int codigo) {
+
+        this.consecutivo = consecutivo;
         this.nombre = nombre;
         this.existencias = existencias;
         this.unidad = unidad;
         this.precio = precio;
-        this.codigo = consecutivo;
+        this.codigo = codigo;
     }
+    
+    public void agregarProducto(String nombre, int existencias, double unidad, double precio) {
 
-    public void editarProducto(String nombre, double existencias,
-                               String unidad, double precio) {
-        this.nombre = nombre;
-        this.existencias = existencias;
-        this.unidad = unidad;
-        this.precio = precio;
-    }
+this.nombre = nombre;
+this.existencias = existencias;
+this.unidad = unidad;
+this.precio = precio;
+}
 
-    public int getCodigo() {
-        return codigo;
-    }
+public void editarProducto(String nombre, int existencias, double unidad, double precio) {
 
-    public String getNombre() {
-        return nombre;
-    }
+this.nombre = nombre;
+this.existencias = existencias;
+this.unidad = unidad;
+this.precio = precio;
+}
 
-    public double getPrecio() {
-        return precio;
-    }
+public int getConsecutivo() {
+return consecutivo;
+}
 
-    public double getExistencias() {
-        return existencias;
-    }
+public String getNombre() {
+return nombre;
+}
 
-    public void reducirExistencias(double cantidad) {
-        existencias -= cantidad;
-    }
+public int getExistencias() {
+return existencias;
+}
 
-    @Override
-    public String toString() {
-        return "Producto{" +
-                "codigo=" + codigo +
-                ", nombre='" + nombre + '\'' +
-                ", existencias=" + existencias +
-                ", unidad='" + unidad + '\'' +
-                ", precio=" + precio +
-                '}';
-    }
+public double getUnidad() {
+return unidad;
+}
+
+public double getPrecio() {
+return precio;
+}
+
+public int getCodigo() {
+return codigo;
+}
+
+@Override
+public String toString() {
+return nombre + " - ₡" + precio;
+}
 }

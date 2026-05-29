@@ -44,6 +44,18 @@ public class Cliente {
     public List<Orden> getOrdenes() {
         return ordenes;
     }
+    
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     @Override
     public String toString() {

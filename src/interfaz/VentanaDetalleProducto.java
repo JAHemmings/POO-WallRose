@@ -6,6 +6,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import logica.Producto;
+
 
 public class VentanaDetalleProducto extends JFrame {
 
@@ -17,14 +19,20 @@ public class VentanaDetalleProducto extends JFrame {
     private JTextField txtPrecio;
     private JTextField txtCodigo;
 
-    public VentanaDetalleProducto() {
+    private Producto producto;
+
+    public VentanaDetalleProducto(Producto producto) {
+
+        this.producto = producto;
 
         setTitle("Detalle Producto");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 500, 450);
+        setLocationRelativeTo(null);
 
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
@@ -35,7 +43,6 @@ public class VentanaDetalleProducto extends JFrame {
         txtNombre = new JTextField();
         txtNombre.setBounds(160, 40, 220, 25);
         contentPane.add(txtNombre);
-        txtNombre.setColumns(10);
 
         JLabel lblExistencias = new JLabel("Existencias");
         lblExistencias.setBounds(40, 90, 100, 25);
@@ -44,7 +51,6 @@ public class VentanaDetalleProducto extends JFrame {
         txtExistencias = new JTextField();
         txtExistencias.setBounds(160, 90, 220, 25);
         contentPane.add(txtExistencias);
-        txtExistencias.setColumns(10);
 
         JLabel lblUnidad = new JLabel("Unidad");
         lblUnidad.setBounds(40, 140, 100, 25);
@@ -53,7 +59,6 @@ public class VentanaDetalleProducto extends JFrame {
         txtUnidad = new JTextField();
         txtUnidad.setBounds(160, 140, 220, 25);
         contentPane.add(txtUnidad);
-        txtUnidad.setColumns(10);
 
         JLabel lblPrecio = new JLabel("Precio");
         lblPrecio.setBounds(40, 190, 100, 25);
@@ -62,7 +67,6 @@ public class VentanaDetalleProducto extends JFrame {
         txtPrecio = new JTextField();
         txtPrecio.setBounds(160, 190, 220, 25);
         contentPane.add(txtPrecio);
-        txtPrecio.setColumns(10);
 
         JLabel lblCodigo = new JLabel("Código");
         lblCodigo.setBounds(40, 240, 100, 25);
@@ -71,14 +75,29 @@ public class VentanaDetalleProducto extends JFrame {
         txtCodigo = new JTextField();
         txtCodigo.setBounds(160, 240, 220, 25);
         contentPane.add(txtCodigo);
-        txtCodigo.setColumns(10);
 
-        JButton btnGuardar = new JButton("Guardar");
-        btnGuardar.setBounds(90, 320, 120, 40);
-        contentPane.add(btnGuardar);
+        JButton btnCerrar = new JButton("Cerrar");
+        btnCerrar.setBounds(170, 320, 120, 40);
+        contentPane.add(btnCerrar);
 
-        JButton btnLimpiar = new JButton("Limpiar");
-        btnLimpiar.setBounds(260, 320, 120, 40);
-        contentPane.add(btnLimpiar);
+        cargarDatos();
+
+        btnCerrar.addActionListener(e -> {
+            dispose();
+        });
+    }
+
+    public void cargarDatos() {
+        txtNombre.setText(producto.getNombre());
+        txtExistencias.setText(String.valueOf(producto.getExistencias()));
+        txtUnidad.setText(String.valueOf(producto.getUnidad()));
+        txtPrecio.setText(String.valueOf(producto.getPrecio()));
+        txtCodigo.setText(String.valueOf(producto.getCodigo()));
+        
+        txtNombre.setEditable(false);
+        txtExistencias.setEditable(false);
+        txtUnidad.setEditable(false);
+        txtPrecio.setEditable(false);
+        txtCodigo.setEditable(false);
     }
 }

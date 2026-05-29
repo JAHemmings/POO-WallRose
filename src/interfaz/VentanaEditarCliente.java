@@ -100,7 +100,7 @@ public class VentanaEditarCliente extends JFrame {
         cliente.setNombre(nombre);
         cliente.setEmail(email);
 
-        JOptionPane.showMessageDialog(this,"Cliente actualizado correctamente");
+        JOptionPane.showMessageDialog(this, "Cliente actualizado correctamente");
 
         dispose();
     }

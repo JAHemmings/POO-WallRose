@@ -137,7 +137,7 @@ public class VentanaClientes extends JFrame {
 
         int fila = table.getSelectedRow();
         if (fila == -1) {
-            JOptionPane.showMessageDialog(this,"Seleccione un cliente");
+            JOptionPane.showMessageDialog(this, "Seleccione un cliente");
             return;
         }
 
@@ -145,8 +145,7 @@ public class VentanaClientes extends JFrame {
 
         VentanaEditarCliente ventana = new VentanaEditarCliente();
 
-        ventana.cargarDatos(cliente.getId(), cliente.getNombre(), cliente.getEmail()
-        );
+        ventana.cargarDatos();
 
         ventana.setVisible(true);
     }
@@ -158,11 +157,8 @@ public class VentanaClientes extends JFrame {
         	JOptionPane.showMessageDialog(this, "Seleccione un cliente");
             return;
         }
-
         Cliente cliente = control.obtenerClientes().get(fila);
-
         VentanaDetalleCliente ventana = new VentanaDetalleCliente(cliente);
-
         ventana.setVisible(true);
     }
 
